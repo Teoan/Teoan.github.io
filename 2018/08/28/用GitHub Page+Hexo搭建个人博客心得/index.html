@@ -121,7 +121,7 @@
 <meta property="og:image" content="https://huaji8.top/img/live2d/haru.gif">
 <meta property="og:image" content="https://huaji8.top/img/live2d/tsumiki.gif">
 <meta property="og:image" content="http://i2.bvimg.com/659993/b27d50bc5532211b.png">
-<meta property="og:updated_time" content="2018-08-28T13:53:17.509Z">
+<meta property="og:updated_time" content="2018-08-28T14:27:22.121Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="用GitHub Page+Hexo搭建个人博客">
 <meta name="twitter:description" content="前言由于暑假在家极其容易咸鱼，对此在网上找了一些可以既可以花费时间去折腾又可以学到知识的东西，于是在知乎找到了这么一篇文章GitHub+Hexo搭建个人网站详细教程,于是我花了一天的时间搭了一个属于自己的博客，用来记录一些琐碎的知识，还有自己在实践中遇到的一些坑，下面我会分享一下我搭个人博客所用到的资源和心得。">
@@ -266,6 +266,14 @@
     <a href="/archives/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
   </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-image">
+    <a href="/image" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-image"></i> <br />相册</a>
+  </li>
 
       
       
@@ -388,7 +396,7 @@
                 
               
 
-              <time title="创建时间：2018-08-28 11:27:03 / 修改时间：21:53:17" itemprop="dateCreated datePublished" datetime="2018-08-28T11:27:03+08:00">2018-08-28</time>
+              <time title="创建时间：2018-08-28 11:27:03 / 修改时间：22:27:22" itemprop="dateCreated datePublished" datetime="2018-08-28T11:27:03+08:00">2018-08-28</time>
             
 
             
@@ -455,7 +463,7 @@
         <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>由于暑假在家极其容易咸鱼，对此在网上找了一些可以既可以花费时间去折腾又可以学到知识的东西，于是在知乎找到了这么一篇文章<a href="https://zhuanlan.zhihu.com/p/26625249" target="_blank" rel="noopener">GitHub+Hexo搭建个人网站详细教程</a>,于是我花了一天的时间搭了一个属于自己的博客，用来记录一些琐碎的知识，还有自己在实践中遇到的一些坑，下面我会分享一下我搭个人博客所用到的资源和心得。</p>
 <a id="more"></a>
 <hr>
-<h1 id="利用hexo搭博客遇到的问题"><a href="#利用hexo搭博客遇到的问题" class="headerlink" title="利用hexo搭博客遇到的问题"></a>利用hexo搭博客遇到的问题</h1><h2 id="关于域名"><a href="#关于域名" class="headerlink" title="关于域名"></a>关于域名</h2><p>博客搭建完之后，其实可以用xxxx.github.io来访问，xxxx为你的github用户名。当然很多小伙伴希望用自己的域名来访问博客，这个时候就需要去注册一个自己的域名了，我是通过<a href="https://wanwang.aliyun.com/?spm=5176.8142029.388261.1321.e9396d3ePP5wWY" target="_blank" rel="noopener">阿里云的万网</a>注册的,<img src="http://i2.bvimg.com/659993/4e889a31201da80b.png" alt="Markdown"><strong>类型A</strong>的记录值是你github仓库的ip地址，ip地址可以利用终端ping一下的你仓库域名(xxxx.github.io)获取,<strong>类型CNAME</strong>则是你github仓库的域名即 <em>xxxx.github.io</em>,设置完域名的解析和配置github仓库后，就可以如愿的通过域名访问博客了。<strong>需要注意的是，注册完域名一定要进行实名认证，这样域名才能够正常使用。</strong></p>
+<h1 id="使用hexo搭博客遇到的问题"><a href="#使用hexo搭博客遇到的问题" class="headerlink" title="使用hexo搭博客遇到的问题"></a>使用hexo搭博客遇到的问题</h1><h2 id="关于域名"><a href="#关于域名" class="headerlink" title="关于域名"></a>关于域名</h2><p>博客搭建完之后，其实可以用xxxx.github.io来访问，xxxx为你的github用户名。当然很多小伙伴希望用自己的域名来访问博客，这个时候就需要去注册一个自己的域名了，我是通过<a href="https://wanwang.aliyun.com/?spm=5176.8142029.388261.1321.e9396d3ePP5wWY" target="_blank" rel="noopener">阿里云的万网</a>注册的,<img src="http://i2.bvimg.com/659993/4e889a31201da80b.png" alt="Markdown"><strong>类型A</strong>的记录值是你github仓库的ip地址，ip地址可以利用终端ping一下的你仓库域名(xxxx.github.io)获取,<strong>类型CNAME</strong>则是你github仓库的域名即 <em>xxxx.github.io</em>,设置完域名的解析和配置github仓库后，就可以如愿的通过域名访问博客了。<strong>需要注意的是，注册完域名一定要进行实名认证，这样域名才能够正常使用。</strong></p>
 <hr>
 <h2 id="关于hexo-live2d插件"><a href="#关于hexo-live2d插件" class="headerlink" title="关于hexo live2d插件"></a>关于hexo live2d插件</h2><p>博客搭好了，你可能会觉得你的博客有点单调，这个时候就可以利用live2d插件添加一个你喜欢的看板娘，看板娘的类型有很多比如:<br><img src="https://huaji8.top/img/live2d/Epsilon2.1.gif" alt="Epsilon2.1"><br><img src="https://huaji8.top/img/live2d/haru.gif" alt="haru"><br><img src="https://huaji8.top/img/live2d/tsumiki.gif" alt="tsumiki"><br>类似于这样的动漫看板娘还有好多，我就不一一列举了，如果你想了解更多类型的看板娘，可以到<a href="https://huaji8.top/post/live2d-plugin-2.0/" target="_blank" rel="noopener">live2d插件作者的博客观摩</a>，配置live2d插件很简单，可以根据<a href="https://github.com/EYHN/hexo-helper-live2d/blob/master/README.zh-CN.md" target="_blank" rel="noopener">live2d插件github</a>中的md进行配置，相信这些难不倒你。<br>如果你和我一样用的是<strong>next</strong>主题的话，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">live2d:</span><br><span class="line">  enable: true</span><br><span class="line">  scriptFrom: local</span><br><span class="line">  pluginRootPath: live2dw/</span><br><span class="line">  pluginJsPath: lib/</span><br><span class="line">  pluginModelPath: assets/</span><br><span class="line">  tagMode: false</span><br><span class="line">  debug: false</span><br><span class="line">  model:</span><br><span class="line">    use: live2d-widget-model-wanko</span><br><span class="line">  display:</span><br><span class="line">    position: right</span><br><span class="line">    width: 150</span><br><span class="line">    height: 300</span><br><span class="line">  mobile:</span><br><span class="line">    show: true</span><br></pre></td></tr></table></figure></p>
 <p>以上配置应该是添加到Hexo的<strong>_config.yml</strong>文件，而不是主题的<strong>_config.yml</strong>文件。(我一开始添加到主题的配置文件中毫无作用。。。)<br>现在，看板娘已经出现在你的博客中了，如果你想了解更多live2d插件配置的属性可以参阅<a href="https://l2dwidget.js.org/docs/class/src/index.js~L2Dwidget.html#instance-method-init" target="_blank" rel="noopener">live2d-widget.js API</a>。如果你想制作你自己的看板娘到自己的博客，可以参阅<a href="http://www.live2d.com/ja/" target="_blank" rel="noopener">live2d官网</a>和这两篇文章</p>
@@ -490,6 +498,20 @@
 
     
 
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>Teoan</li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://yoursite.com/2018/08/28/用GitHub Page+Hexo搭建个人博客心得/" title="用GitHub Page+Hexo搭建个人博客">http://yoursite.com/2018/08/28/用GitHub Page+Hexo搭建个人博客心得/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+</ul>
+
+      </div>
     
 
     <footer class="post-footer">
@@ -661,7 +683,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#利用hexo搭博客遇到的问题"><span class="nav-number">2.</span> <span class="nav-text">利用hexo搭博客遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于域名"><span class="nav-number">2.1.</span> <span class="nav-text">关于域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于hexo-live2d插件"><span class="nav-number">2.2.</span> <span class="nav-text">关于hexo live2d插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于NexT主题"><span class="nav-number">2.3.</span> <span class="nav-text">关于NexT主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于页脚"><span class="nav-number">2.4.</span> <span class="nav-text">关于页脚</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用hexo搭博客遇到的问题"><span class="nav-number">2.</span> <span class="nav-text">使用hexo搭博客遇到的问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#关于域名"><span class="nav-number">2.1.</span> <span class="nav-text">关于域名</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于hexo-live2d插件"><span class="nav-number">2.2.</span> <span class="nav-text">关于hexo live2d插件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于NexT主题"><span class="nav-number">2.3.</span> <span class="nav-text">关于NexT主题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于页脚"><span class="nav-number">2.4.</span> <span class="nav-text">关于页脚</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -1204,6 +1226,72 @@
   
 
   
+  <style>
+    .copy-btn {
+      display: inline-block;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 20px;
+      color: #333;
+      white-space: nowrap;
+      vertical-align: middle;
+      cursor: pointer;
+      background-color: #eee;
+      background-image: linear-gradient(#fcfcfc, #eee);
+      border: 1px solid #d5d5d5;
+      border-radius: 3px;
+      user-select: none;
+      outline: 0;
+    }
+
+    .highlight-wrap .copy-btn {
+      transition: opacity .3s ease-in-out;
+      opacity: 0;
+      padding: 2px 6px;
+      position: absolute;
+      right: 4px;
+      top: 8px;
+    }
+
+    .highlight-wrap:hover .copy-btn,
+    .highlight-wrap .copy-btn:focus {
+      opacity: 1
+    }
+
+    .highlight-wrap {
+      position: relative;
+    }
+  </style>
+  <script>
+    $('.highlight').each(function (i, e) {
+      var $wrap = $('<div>').addClass('highlight-wrap')
+      $(e).after($wrap)
+      $wrap.append($('<button>').addClass('copy-btn').append('复制').on('click', function (e) {
+        var code = $(this).parent().find('.code').find('.line').map(function (i, e) {
+          return $(e).text()
+        }).toArray().join('\n')
+        var ta = document.createElement('textarea')
+        document.body.appendChild(ta)
+        ta.style.position = 'absolute'
+        ta.style.top = '0px'
+        ta.style.left = '0px'
+        ta.value = code
+        ta.select()
+        ta.focus()
+        var result = document.execCommand('copy')
+        document.body.removeChild(ta)
+        
+        $(this).blur()
+      })).on('mouseleave', function (e) {
+        var $b = $(this).find('.copy-btn')
+        setTimeout(function () {
+          $b.text('复制')
+        }, 300)
+      }).append(e)
+    })
+  </script>
+
 
   
   <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
