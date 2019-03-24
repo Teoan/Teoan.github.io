@@ -3,7 +3,7 @@
   <entry>
     <title><![CDATA[关于Android客户端RSA加解密后出现乱码的问题]]></title>
     <url>%2F2019%2F03%2F24%2F%E5%85%B3%E4%BA%8EAndroid%E5%AE%A2%E6%88%B7%E7%AB%AFRSA%E5%8A%A0%E8%A7%A3%E5%AF%86%E5%90%8E%E5%87%BA%E7%8E%B0%E4%B9%B1%E7%A0%81%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
-    <content type="text"><![CDATA[前言在项目过程中需要通过okhttp获取服务器上数据库的数据后进行RSA解密。 解密可以成功，但是前面会出现����乱码 ������������������������������������������������������������������������������������������������{“status”:0,”userName”:”Teoan”} 本以为是编码问题，但是转换成UTF-8后发现还是一样。 解决办法查找的一番资料后完美解决，在Android移动端获取解密的Cipher类时要使用Cipher.getInstance(“RSA/ECB/PKCS1Padding”); 而在服务器端应该使用Cipher.getInstance(“RSA”);来获取。 本文参考文档(https://blog.csdn.net/totcw/article/details/72820444)]]></content>
+    <content type="text"><![CDATA[前言在项目过程中需要通过okhttp获取服务器上数据库的数据后进行RSA解密。 解密可以成功，但是前面会出现����乱码 ��������������������{“status”:0,”userName”:”Teoan”} 本以为是编码问题，但是转换成UTF-8后发现还是一样。 解决办法查找的一番资料后完美解决，在Android移动端获取解密的Cipher类时要使用Cipher.getInstance(“RSA/ECB/PKCS1Padding”); 而在服务器端应该使用Cipher.getInstance(“RSA”);来获取。 本文参考文档(https://blog.csdn.net/totcw/article/details/72820444)]]></content>
       <categories>
         <category>Android</category>
       </categories>
