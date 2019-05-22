@@ -121,18 +121,18 @@
 
 
 
-  <meta name="description" content="前言经历了两个多月的时间，终于把毕业设计的要求一步一步地慢慢实现了，中间踩过的坑数不胜数，由此列出了一些遇到的问题还有解决方法。">
+  <meta name="description" content="前言经历了两个多月的时间，终于把毕业设计的要求一步一步地慢慢实现了，中间踩过的坑数不胜数，由此列出了一些遇到的问题还有解决方法。项目地址：https://github.com/Teoan/garage">
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="总结一下毕业设计项目中所遇到的问题">
 <meta property="og:url" content="http://teoan.top/2019/05/22/总结一下毕业设计项目中所遇到的问题/index.html">
 <meta property="og:site_name" content="Teoan&#39;s Notes">
-<meta property="og:description" content="前言经历了两个多月的时间，终于把毕业设计的要求一步一步地慢慢实现了，中间踩过的坑数不胜数，由此列出了一些遇到的问题还有解决方法。">
+<meta property="og:description" content="前言经历了两个多月的时间，终于把毕业设计的要求一步一步地慢慢实现了，中间踩过的坑数不胜数，由此列出了一些遇到的问题还有解决方法。项目地址：https://github.com/Teoan/garage">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-22T08:26:38.746Z">
+<meta property="og:updated_time" content="2019-05-22T08:33:25.854Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="总结一下毕业设计项目中所遇到的问题">
-<meta name="twitter:description" content="前言经历了两个多月的时间，终于把毕业设计的要求一步一步地慢慢实现了，中间踩过的坑数不胜数，由此列出了一些遇到的问题还有解决方法。">
+<meta name="twitter:description" content="前言经历了两个多月的时间，终于把毕业设计的要求一步一步地慢慢实现了，中间踩过的坑数不胜数，由此列出了一些遇到的问题还有解决方法。项目地址：https://github.com/Teoan/garage">
 
 
 
@@ -395,7 +395,7 @@
                 
               
 
-              <time title="创建时间：2019-05-22 10:55:25 / 修改时间：16:26:38" itemprop="dateCreated datePublished" datetime="2019-05-22T10:55:25+08:00">2019-05-22</time>
+              <time title="创建时间：2019-05-22 10:55:25 / 修改时间：16:33:25" itemprop="dateCreated datePublished" datetime="2019-05-22T10:55:25+08:00">2019-05-22</time>
             
 
             
@@ -459,7 +459,8 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>经历了两个多月的时间，终于把毕业设计的要求一步一步地慢慢实现了，中间踩过的坑数不胜数，由此列出了一些遇到的问题还有解决方法。<br><a id="more"></a></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>经历了两个多月的时间，终于把毕业设计的要求一步一步地慢慢实现了，中间踩过的坑数不胜数，由此列出了一些遇到的问题还有解决方法。<br>项目地址：<a href="https://github.com/Teoan/garage" target="_blank" rel="noopener">https://github.com/Teoan/garage</a></p>
+<a id="more"></a>
 <h2 id="在ubuntu中QtCreator无法输入中文"><a href="#在ubuntu中QtCreator无法输入中文" class="headerlink" title="在ubuntu中QtCreator无法输入中文"></a>在ubuntu中QtCreator无法输入中文</h2><p>这个和输入法的类型有关，系统中所使用的输入法为Fcitx，然而Qt自带的插件中只支持iBus输入法。<br>解决：安装fcitx-libs-qt或fcitx-libs-qt5，在系统中找到<strong>libfcitxplatforminputcontextplugin.so</strong>这个动态库文件，复制到Qt安装目录中的<strong>/Tools/QtCreator/lib/Qt/plugins/platforminputcontexts</strong>子目录下，重新运行程序即可解决。(注意:不同版本的Qt，插件的路径会有所不同)</p>
 <h2 id="arm-linux-gcc-成功在Qt编译，但是上传到板子上面运行出现："><a href="#arm-linux-gcc-成功在Qt编译，但是上传到板子上面运行出现：" class="headerlink" title="arm-linux-gcc 成功在Qt编译，但是上传到板子上面运行出现："></a>arm-linux-gcc 成功在Qt编译，但是上传到板子上面运行出现：</h2><blockquote>
 <p>.-/bin/sh: ./xxxxx: not found</p>
