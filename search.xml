@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[总结一下毕业设计项目中所遇到的问题]]></title>
+    <url>%2F2019%2F05%2F22%2F%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%89%80%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[前言经历了两个多月的时间，终于把毕业设计的要求一步一步地慢慢实现了，中间踩过的坑数不胜数，由此列出了一些遇到的问题还有解决方法。 在ubuntu中QtCreator无法输入中文这个和输入法的类型有关，系统中所使用的输入法为Fcitx，然而Qt自带的插件中只支持iBus输入法。解决：安装fcitx-libs-qt或fcitx-libs-qt5，在系统中找到libfcitxplatforminputcontextplugin.so这个动态库文件，复制到Qt安装目录中的/Tools/QtCreator/lib/Qt/plugins/platforminputcontexts子目录下，重新运行程序即可解决。(注意:不同版本的Qt，插件的路径会有所不同) arm-linux-gcc 成功在Qt编译，但是上传到板子上面运行出现： .-/bin/sh: ./xxxxx: not found 解决:我用的工具链版本是4.4.3，板子上内核是用5.4.0编译的，版本不匹配，换一个5.4.0的交叉编译工具链或者比5.4.0新就可以了。 关于交叉编译工具链的选择网上查到的大多数ARM交叉编译工具链版本为4.4.3或者5.4.0，基本上4.4.3版本为32位系统的，5.4.0版本为64位的，然而现在网上资源默认你是用64位版本的系统，所以给的工具链都不会和你说是64位的，然而我用的是32位系统的，为此也遇到了许多坑。网上32位交叉编译工具链的资源比较少，要么得自己去编译，要么要一大堆积分去下载。偶然发现一家和ARM公司合作的Linaro公司,虽然是英文的但是在里面可以找到各种版本个平台的交叉编译工具，再也不用为找ARM交叉编译工具链而烦恼了。各平台各版本下载地址:https://releases.linaro.org/components/toolchain/binaries/ 在ARM板上面使用opencv时，出现: error while loading shared libraries: /lib/libm.so.6: internal error 解决:出现这个问题应该是arm板上面的openvc库的软连接弄丢了，特别是在windows交叉编译的opencv的库,重新建立软连接就可以了。 关于误删除libc.so.6删除后发现各种大多数指令都用不了，会出现没有找到动态库的情况。解决:利用 LD_PRELOAD= 指定运行时的动态库，可以暂时使用常用命令重建软连接。例如： LD_PRELOAD=/lib64/libc-2.12.so ln -s /lib64/libc-2.12.so /lib64/libc.so.6 使用easypr后识别结果为乱码 “\u00E8\u0093\u009D\u00E7\u0089\u008C:\u00E5\u00B7\u009DA88888” 解决:原本的字符串处理方式为:1234CPlate cp =plateVec.at(0);String ret = cp.getPlateStr();QString str =QString::fromLocal8Bit(ret.c_str());ui-&gt;label-&gt;setText(str); 改为:123CPlate cp =plateVec.at(0);cv::String ret = cp.getPlateStr();ui-&gt;label-&gt;setText(ret.c_str()); 注意:ret.c_str()实现可以从cv::String类转换为count char * ,以上做法可以实现在Qt中显示中文，但是如果输出到终端还是会有乱码问题，如果需要终端输出，用cout直接输出String就可以了。]]></content>
+      <categories>
+        <category>ARM</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[关于Android客户端RSA加解密后出现乱码的问题]]></title>
     <url>%2F2019%2F03%2F24%2F%E5%85%B3%E4%BA%8EAndroid%E5%AE%A2%E6%88%B7%E7%AB%AFRSA%E5%8A%A0%E8%A7%A3%E5%AF%86%E5%90%8E%E5%87%BA%E7%8E%B0%E4%B9%B1%E7%A0%81%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
     <content type="text"><![CDATA[前言在项目过程中需要通过okhttp获取服务器上数据库的数据后进行RSA解密。 解密可以成功，但是前面会出现����乱码 ��������������������{“status”:0,”userName”:”Teoan”} 本以为是编码问题，但是转换成UTF-8后发现还是一样。 解决办法查找的一番资料后完美解决，在Android移动端获取解密的Cipher类时要使用Cipher.getInstance(“RSA/ECB/PKCS1Padding”); 而在服务器端应该使用Cipher.getInstance(“RSA”);来获取。 本文参考文档(https://blog.csdn.net/totcw/article/details/72820444)]]></content>
