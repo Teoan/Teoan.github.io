@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[关于ASP.NET中Ajax请求错误的问题]]></title>
+    <url>%2F2019%2F11%2F16%2F%E5%85%B3%E4%BA%8EASP.NET%E4%B8%ADAjax%E8%AF%B7%E6%B1%82%E9%94%99%E8%AF%AF%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
+    <content type="text"><![CDATA[记录下自己做作业时遇到的问题。 在ASP.NET中使用Jquery+Ajax请求时发生身份验证错误错误如下图所示： 解决：找到APP_Start文件夹，更改RouteConfig.cs中AutoRedirectMode的配置。原本为:1settings.AutoRedirectMode = RedirectMode.Permanent; 改为：1settings.AutoRedirectMode = RedirectMode.Off;]]></content>
+      <categories>
+        <category>ASP.NET</category>
+        <category>Ajax</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[记录一下Java Web项目遇到的问题]]></title>
     <url>%2F2019%2F09%2F21%2F%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8BJava%20Web%E9%A1%B9%E7%9B%AE%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
     <content type="text"><![CDATA[前言最近对Java Web应用感兴趣，之前从来没接触过，所以写了篇博文记录自己遇到的问题和解决办法，便于自己回顾复习。 关于反射机制中的BeanUtils开发包在利用BeanUtils开发包封装数据到Bean对象的过程中，特殊对象日期不能直接封装到Bean对象中，需要手动注册一个日期转换器对Date对象进行转换。1ConvertUtils.register(new DateLocaleConverter(), Date.class); 如果按照上面的代码，则会出现类似错误1org.apache.commons.beanutils.ConversionException: Error parsing date '2019-10-10' at position=4 原因是没有给转换器设置对应的地区区域日期格式。查看源码发现DateLocaleConverter类有构造函数DateLocaleConverter(Locale locale, String pattern)，最终解决方法：123DateLocaleConverter converter = new DateLocaleConverter(Locale.getDefault(),"yyyy-MM-dd");converter.setLenient(true);//实现日期自动转换，如输入类似'2019-14-30'的日期时，会自动转换成'2020-03-1'ConvertUtils.register(converter, Date.class); 关于C3P0连接池的配置和使用使用C3P0连接池链接数据库进行增删改查时出现警告：1com.mchange.v2.c3p0.cfg.C3P0Config.getUnspecifiedUserProperties named-config with name 'mysql' does not exist. Using default-config. 并抛出异常：1java.sql.SQLException: No suitable driver 原因：c3p0 获取不到配置文件的内容，使用了默认配置，导致找不到对应的数据库链接。解决办法： 检查xml配置文件中的driverClass和jdbcUr是否写错。 检查c3p0-config.xml是否正确存在于src目录下。 检查c3p0-config.xml第一行是否为空。 关于Mysql插入中文时数据库显示乱码在使用c3p0连接池对中文数据进行插入时出现:1Caused by: java.sql.SQLException: Incorrect string value: &apos;\xF0\x9F\x98\x80\xE3\x80...&apos; for column &apos;show_content&apos; at row 1 Google 了一下，原因在于Mysql中的utf-8编码是按三个字节一个单位编码的，遇到以4个字节为单位的编码的数据就会出现切割，从而出现乱码。按照网上给的解决方法： 将Mysql数据库的编码修改为utf8mb4 将数据表的编码修改为utf8mb4 修改c3p0连接池中Mysql连接配置代码 由于我使用的开发环境是idea+navicat，上述修改十分方便，然而还是不能解决我的问题。我最后的解决办法：修改表中字段的字符集为utf8mb4。]]></content>
