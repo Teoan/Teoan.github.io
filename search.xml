@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[测试]]></title>
+    <url>%2F2019%2F11%2F17%2F%E6%B5%8B%E8%AF%95%2F</url>
+    <content type="text"></content>
+  </entry>
+  <entry>
     <title><![CDATA[关于ASP.NET中Ajax请求错误的问题]]></title>
     <url>%2F2019%2F11%2F16%2F%E5%85%B3%E4%BA%8EASP.NET%E4%B8%ADAjax%E8%AF%B7%E6%B1%82%E9%94%99%E8%AF%AF%E7%9A%84%E9%97%AE%E9%A2%98%2F</url>
     <content type="text"><![CDATA[记录下自己做作业时遇到的问题。 在ASP.NET中使用Jquery+Ajax请求时发生身份验证错误错误如下图所示： 解决：找到APP_Start文件夹，更改RouteConfig.cs中AutoRedirectMode的配置。原本为:1settings.AutoRedirectMode = RedirectMode.Permanent; 改为：1settings.AutoRedirectMode = RedirectMode.Off;]]></content>
