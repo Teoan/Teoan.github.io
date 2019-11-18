@@ -132,7 +132,7 @@
 <meta property="og:image" content="https://i.imgur.com/AoGYaoE.png">
 <meta property="og:image" content="https://i.imgur.com/c1kTXAQ.jpg">
 <meta property="og:image" content="https://i.imgur.com/AlSPQ6A.jpg">
-<meta property="og:updated_time" content="2019-11-18T07:15:16.157Z">
+<meta property="og:updated_time" content="2019-11-18T08:17:21.723Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用Github上的Webhooks实现网站自动化部署">
 <meta name="twitter:description" content="前言由于本人的hexo博客是提交到GitHub上的，每一次更新博客都得在服务器上面手动pull更新，这样就显得十分蛋疼。所以Google了一下我的需求，发现了Github上的Webhooks功能，为此记录下我实现的过程。">
@@ -399,7 +399,7 @@
                 
               
 
-              <time title="创建时间：2019-11-18 13:16:24 / 修改时间：15:15:16" itemprop="dateCreated datePublished" datetime="2019-11-18T13:16:24+08:00">2019-11-18</time>
+              <time title="创建时间：2019-11-18 13:16:24 / 修改时间：16:17:21" itemprop="dateCreated datePublished" datetime="2019-11-18T13:16:24+08:00">2019-11-18</time>
             
 
             
@@ -475,6 +475,10 @@
 <h2 id="安装webhooks后端服务所需要的组件"><a href="#安装webhooks后端服务所需要的组件" class="headerlink" title="安装webhooks后端服务所需要的组件"></a>安装webhooks后端服务所需要的组件</h2><p>安装github-webhook-handler<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -S github-webhook-handler</span><br></pre></td></tr></table></figure></p>
 <p>安装node进程管理工具pm2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g pm2</span><br></pre></td></tr></table></figure></p>
 <h2 id="创建自动化部署脚本文件deploy-sh"><a href="#创建自动化部署脚本文件deploy-sh" class="headerlink" title="创建自动化部署脚本文件deploy.sh"></a>创建自动化部署脚本文件deploy.sh</h2><p>在自定义目录下创建deploy脚本实现自动化部署，内容如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">echo "start deployment"</span><br><span class="line">cd /home/xxx/xxx.github.io</span><br><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master</span><br><span class="line">echo "done"</span><br></pre></td></tr></table></figure></p>
+<p>运行时如果会出现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd: can&apos;t cd to /home/xxx/xxx.github.io</span><br></pre></td></tr></table></figure></p>
+<p>原因可能是你的shell脚本在window上编写的，这样的话到linux系统运行时就会出现编码格式问题，window为dos而linux为unix。解决：<br>使用vim更改文件格式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim deploy.sh</span><br></pre></td></tr></table></figure></p>
+<p>查看文件格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set ff</span><br></pre></td></tr></table></figure></p>
+<p>更改文件格式为unix：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:set ff=unix</span><br><span class="line">或者</span><br><span class="line">:set fileformat=unix</span><br></pre></td></tr></table></figure></p>
 <h2 id="创建Webhook后端运行代码"><a href="#创建Webhook后端运行代码" class="headerlink" title="创建Webhook后端运行代码"></a>创建Webhook后端运行代码</h2><p>在上文deploy.sh文件同一目录下创建webhook.js文件，内容如下<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">var</span> createHandler = <span class="built_in">require</span>(<span class="string">'github-webhook-handler'</span>)</span><br><span class="line"><span class="keyword">var</span> handler = createHandler(&#123; <span class="attr">path</span>: <span class="string">'/auto_deploy'</span>, <span class="attr">secret</span>: <span class="string">'xxxx'</span> &#125;)</span><br><span class="line"><span class="comment">// 上面的 secret 在配置Github上webhook时需要用到</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run_cmd</span>(<span class="params">cmd, args, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> spawn = <span class="built_in">require</span>(<span class="string">'child_process'</span>).spawn;</span><br><span class="line">  <span class="keyword">var</span> child = spawn(cmd, args);</span><br><span class="line">  <span class="keyword">var</span> resp = <span class="string">""</span>;</span><br><span class="line">  child.stdout.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">buffer</span>) </span>&#123; resp += buffer.toString(); &#125;);</span><br><span class="line">  child.stdout.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; callback (resp) &#125;);</span><br><span class="line">&#125;</span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  handler(req, res, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    res.statusCode = <span class="number">404</span></span><br><span class="line">    res.end(<span class="string">'no such location'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;).listen(<span class="number">10000</span>)<span class="comment">//监听本地10000端口</span></span><br><span class="line">handler.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.error(<span class="string">'Error:'</span>, err.message)</span><br><span class="line">&#125;)</span><br><span class="line">handler.on(<span class="string">'push'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Received a push event for %s to %s'</span>,</span><br><span class="line">    event.payload.repository.name,</span><br><span class="line">    event.payload.ref);</span><br><span class="line">    run_cmd(<span class="string">'sh'</span>, [<span class="string">'./deploy.sh'</span>,event.payload.repository.name], <span class="function"><span class="keyword">function</span>(<span class="params">text</span>)</span>&#123; <span class="built_in">console</span>.log(text) &#125;);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//deploy.sh为自动化部署的脚本文件</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="使用pm2进程管理器运行webhook-js"><a href="#使用pm2进程管理器运行webhook-js" class="headerlink" title="使用pm2进程管理器运行webhook.js"></a>使用pm2进程管理器运行webhook.js</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start webhook.js</span><br></pre></td></tr></table></figure>
 <p>如果在运行的时候如果提示 github-webhook-handler is not defined 未找到 ，可以在目录中执行 npm link github-webhook-handler。<br>可以使用以下命令查看端口是否正常使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tlnp|grep 10000</span><br></pre></td></tr></table></figure></p>
@@ -555,10 +559,6 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/11/18/test/" rel="prev" title="test">
-                test <i class="fa fa-chevron-right"></i>
-              </a>
-            
           </div>
         </div>
       
@@ -631,7 +631,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
