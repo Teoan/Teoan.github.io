@@ -125,11 +125,11 @@
 <meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="记录一下Java Web项目遇到的问题">
-<meta property="og:url" content="http://teoan.top/2019/09/21/记录一下Java Web项目遇到的问题/index.html">
+<meta property="og:url" content="https://teoan.top/2019/09/21/记录一下Java Web项目遇到的问题/index.html">
 <meta property="og:site_name" content="Teoan&#39;s Notes">
 <meta property="og:description" content="前言最近对Java Web应用感兴趣，之前从来没接触过，所以写了篇博文记录自己遇到的问题和解决办法，便于自己回顾复习。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-10-02T12:07:39.125Z">
+<meta property="og:updated_time" content="2020-02-11T14:29:25.614Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记录一下Java Web项目遇到的问题">
 <meta name="twitter:description" content="前言最近对Java Web应用感兴趣，之前从来没接触过，所以写了篇博文记录自己遇到的问题和解决办法，便于自己回顾复习。">
@@ -139,7 +139,7 @@
 
 
 
-  <link rel="canonical" href="http://teoan.top/2019/09/21/记录一下Java Web项目遇到的问题/"/>
+  <link rel="canonical" href="https://teoan.top/2019/09/21/记录一下Java Web项目遇到的问题/"/>
 
 
 
@@ -353,7 +353,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://teoan.top/2019/09/21/记录一下Java Web项目遇到的问题/">
+    <link itemprop="mainEntityOfPage" href="https://teoan.top/2019/09/21/记录一下Java Web项目遇到的问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Teoan">
@@ -412,7 +412,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-10-02 20:07:39" itemprop="dateModified" datetime="2019-10-02T20:07:39+08:00">2019-10-02</time>
+                <time title="修改时间：2020-02-11 22:29:25" itemprop="dateModified" datetime="2020-02-11T22:29:25+08:00">2020-02-11</time>
               
             
           </span>
@@ -492,6 +492,21 @@
 <li>修改c3p0连接池中Mysql连接配置代码</li>
 </ol>
 <p>由于我使用的开发环境是idea+navicat，上述修改十分方便，然而还是不能解决我的问题。<br>我最后的解决办法：修改表中字段的字符集为utf8mb4。</p>
+<h2 id="关于jsp页面无法使用EL表达式"><a href="#关于jsp页面无法使用EL表达式" class="headerlink" title="关于jsp页面无法使用EL表达式"></a>关于jsp页面无法使用EL表达式</h2><p>在使用String MVC开发过程中，使用Model类中的函数<strong>addAttribute</strong>向前端jsp页面传值时出现无法解析问题，抛出的异常如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">java.lang.NumberFormatException: For input string: <span class="string">"$&#123;begin &#125;"</span></span><br><span class="line">	at java.base/java.lang.NumberFormatException.forInputString(NumberFormatException.java:<span class="number">68</span>)</span><br><span class="line">	at java.base/java.lang.Integer.parseInt(Integer.java:<span class="number">644</span>)</span><br><span class="line">	at java.base/java.lang.Integer.valueOf(Integer.java:<span class="number">989</span>)</span><br><span class="line">	at org.apache.jasper.compiler.JspUtil.coerceToInt(JspUtil.java:<span class="number">560</span>)</span><br></pre></td></tr></table></figure></p>
+<p>抛出的异常显示对字符串<strong>${begin }</strong>的格式转换错误，于是找到该变量在jsp文件中的位置如下：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;c:forEach begin=<span class="string">"$&#123;begin &#125;"</span> end=<span class="string">"$&#123;end &#125;"</span> var=<span class="string">"i"</span>&gt;</span><br><span class="line">    &lt;c:choose&gt;</span><br><span class="line">        &lt;c:when test=<span class="string">"$&#123;i eq pageInfo.pageNum &#125;"</span>&gt;</span><br><span class="line">            &lt;a class="page-numbers current"&gt;$&#123;i&#125;&lt;/a&gt;</span><br><span class="line">        &lt;/c:when&gt;</span><br><span class="line">        &lt;c:otherwise&gt;</span><br><span class="line">            &lt;a class="page-numbers" href="$&#123;pageUrlPrefix&#125;=$&#123;i&#125;"&gt;$&#123;i&#125;&lt;/a&gt;</span><br><span class="line">        &lt;/c:otherwise&gt;</span><br><span class="line">    &lt;/c:choose&gt;</span><br><span class="line">&lt;/c:forEach&gt;</span><br></pre></td></tr></table></figure></p>
+<p>显然jsp页面无法将EL表达式中的<strong>${begin }</strong>解析为int。<br>原因如下：使用了老的JSP 1.2 声明，在JSP 1.2 声明中EL表达式默认是关闭的。<br>解决办法：使用新的JSP声明替换掉旧的声明。找到webapp/WEB-INF路径下的web.xml文件，将约束头替换成新的版本。<br>各版本约束头如下：</p>
+<h3 id="web-app-3-1"><a href="#web-app-3-1" class="headerlink" title="web-app 3.1"></a>web-app 3.1</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">xmlns</span>=<span class="string">"http://xmlns.jcp.org/xml/ns/javaee"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"</span></span></span><br><span class="line"><span class="tag">      <span class="attr">version</span>=<span class="string">"3.1"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>jdk版本1.7以上</p>
+<h3 id="web-app-3-0"><a href="#web-app-3-0" class="headerlink" title="web-app 3.0"></a>web-app 3.0</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/javaee"</span>  </span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span>  </span></span><br><span class="line"><span class="tag">        <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">version</span>=<span class="string">"3.0"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>jdk版本1.6以上,支持jsp-config配置</p>
+<h3 id="web-app-2-5"><a href="#web-app-2-5" class="headerlink" title="web-app 2.5"></a>web-app 2.5</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/javaee"</span>  </span></span><br><span class="line"><span class="tag">        <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span>  </span></span><br><span class="line"><span class="tag">        <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"</span>  </span></span><br><span class="line"><span class="tag">        <span class="attr">version</span>=<span class="string">"2.5"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>jdk版本1.5以上</p>
+<h3 id="web-app-2-4"><a href="#web-app-2-4" class="headerlink" title="web-app 2.4"></a>web-app 2.4</h3><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">web-app</span> <span class="attr">xmlns</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee"</span>   </span></span><br><span class="line"><span class="tag">    <span class="attr">xmlns:xsi</span>=<span class="string">"http://www.w3.org/2001/XMLSchema-instance"</span>  </span></span><br><span class="line"><span class="tag">    <span class="attr">xsi:schemaLocation</span>=<span class="string">"http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"</span> </span></span><br><span class="line"><span class="tag">    <span class="attr">version</span>=<span class="string">"2.4"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
 
       
     </div>
@@ -528,7 +543,7 @@
     <strong>本文作者： </strong>Teoan</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://teoan.top/2019/09/21/记录一下Java Web项目遇到的问题/" title="记录一下Java Web项目遇到的问题">http://teoan.top/2019/09/21/记录一下Java Web项目遇到的问题/</a>
+    <a href="https://teoan.top/2019/09/21/记录一下Java Web项目遇到的问题/" title="记录一下Java Web项目遇到的问题">https://teoan.top/2019/09/21/记录一下Java Web项目遇到的问题/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
@@ -748,7 +763,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于反射机制中的BeanUtils开发包"><span class="nav-number">2.</span> <span class="nav-text">关于反射机制中的BeanUtils开发包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于C3P0连接池的配置和使用"><span class="nav-number">3.</span> <span class="nav-text">关于C3P0连接池的配置和使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于Mysql插入中文时数据库显示乱码"><span class="nav-number">4.</span> <span class="nav-text">关于Mysql插入中文时数据库显示乱码</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于反射机制中的BeanUtils开发包"><span class="nav-number">2.</span> <span class="nav-text">关于反射机制中的BeanUtils开发包</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于C3P0连接池的配置和使用"><span class="nav-number">3.</span> <span class="nav-text">关于C3P0连接池的配置和使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于Mysql插入中文时数据库显示乱码"><span class="nav-number">4.</span> <span class="nav-text">关于Mysql插入中文时数据库显示乱码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于jsp页面无法使用EL表达式"><span class="nav-number">5.</span> <span class="nav-text">关于jsp页面无法使用EL表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#web-app-3-1"><span class="nav-number">5.1.</span> <span class="nav-text">web-app 3.1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-app-3-0"><span class="nav-number">5.2.</span> <span class="nav-text">web-app 3.0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-app-2-5"><span class="nav-number">5.3.</span> <span class="nav-text">web-app 2.5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#web-app-2-4"><span class="nav-number">5.4.</span> <span class="nav-text">web-app 2.4</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -775,7 +790,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 2018 – <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
