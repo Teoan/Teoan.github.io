@@ -122,20 +122,20 @@
 
 
   <meta name="description" content="前言由于本人的hexo博客是提交到GitHub上的，每一次更新博客都得在服务器上面手动pull更新，这样就显得十分蛋疼。所以Google了一下我的需求，发现了Github上的Webhooks功能，为此记录下我实现的过程。">
-<meta name="keywords" content="笔记">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用Github上的Webhooks实现网站自动化部署">
-<meta property="og:url" content="https://teoan.top/2019/11/18/利用Github上的Webhooks实现网站自动化部署/index.html">
+<meta property="og:url" content="https://teoan.top/2019/11/18/%E5%88%A9%E7%94%A8Github%E4%B8%8A%E7%9A%84Webhooks%E5%AE%9E%E7%8E%B0%E7%BD%91%E7%AB%99%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/index.html">
 <meta property="og:site_name" content="Teoan&#39;s Notes">
 <meta property="og:description" content="前言由于本人的hexo博客是提交到GitHub上的，每一次更新博客都得在服务器上面手动pull更新，这样就显得十分蛋疼。所以Google了一下我的需求，发现了Github上的Webhooks功能，为此记录下我实现的过程。">
-<meta property="og:locale" content="zh-CN">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://i.imgur.com/AoGYaoE.png">
 <meta property="og:image" content="https://i.imgur.com/c1kTXAQ.jpg">
 <meta property="og:image" content="https://i.imgur.com/AlSPQ6A.jpg">
-<meta property="og:updated_time" content="2019-11-18T08:17:21.723Z">
+<meta property="article:published_time" content="2019-11-18T05:16:24.000Z">
+<meta property="article:modified_time" content="2019-11-18T08:17:21.723Z">
+<meta property="article:author" content="Teoan">
+<meta property="article:tag" content="笔记">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="利用Github上的Webhooks实现网站自动化部署">
-<meta name="twitter:description" content="前言由于本人的hexo博客是提交到GitHub上的，每一次更新博客都得在服务器上面手动pull更新，这样就显得十分蛋疼。所以Google了一下我的需求，发现了Github上的Webhooks功能，为此记录下我实现的过程。">
 <meta name="twitter:image" content="https://i.imgur.com/AoGYaoE.png">
 
 
@@ -191,7 +191,7 @@
   </style>
 </noscript>
 
-</head>
+<meta name="generator" content="Hexo 4.2.0"></head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
@@ -202,7 +202,7 @@
 
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
-<a href="https://github.com/Teoan" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<a href="https://github.com/Teoan" target="_blank" rel="noopener" class="github-corner" aria-label="View source on Github"><svg width="80" height="80" viewBox="0 0 250 250" style="fill:#151513; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
@@ -357,7 +357,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://teoan.top/2019/11/18/利用Github上的Webhooks实现网站自动化部署/">
+    <link itemprop="mainEntityOfPage" href="https://teoan.top/2019/11/18/%E5%88%A9%E7%94%A8Github%E4%B8%8A%E7%9A%84Webhooks%E5%AE%9E%E7%8E%B0%E7%BD%91%E7%AB%99%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Teoan">
@@ -444,15 +444,33 @@
           
 
           
-            <span class="post-meta-divider">|</span>
-            <span class="post-meta-item-icon"
-            >
-            <i class="fa fa-eye"></i>
-             阅读次数： 
-            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
-            </span>
-          
 
+          
+            <div class="post-symbolscount">
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                <span title="本文字数">10k</span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                <span title="阅读时长">Infinity:aN</span>
+              
+            </div>
           
 
           
@@ -470,22 +488,39 @@
       
 
       
-        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于本人的hexo博客是提交到GitHub上的，每一次更新博客都得在服务器上面手动pull更新，这样就显得十分蛋疼。所以Google了一下我的需求，发现了Github上的<a href="https://developer.github.com/webhooks/" target="_blank" rel="noopener">Webhooks</a>功能，为此记录下我实现的过程。<br><a id="more"></a></p>
-<h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><p>由于Webhooks使用的是NodeJS，所以需要安装npm等相关的依赖。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nodejs</span><br><span class="line">sudo apt-get install npm</span><br></pre></td></tr></table></figure></p>
-<h2 id="安装webhooks后端服务所需要的组件"><a href="#安装webhooks后端服务所需要的组件" class="headerlink" title="安装webhooks后端服务所需要的组件"></a>安装webhooks后端服务所需要的组件</h2><p>安装github-webhook-handler<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -S github-webhook-handler</span><br></pre></td></tr></table></figure></p>
-<p>安装node进程管理工具pm2<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g pm2</span><br></pre></td></tr></table></figure></p>
-<h2 id="创建自动化部署脚本文件deploy-sh"><a href="#创建自动化部署脚本文件deploy-sh" class="headerlink" title="创建自动化部署脚本文件deploy.sh"></a>创建自动化部署脚本文件deploy.sh</h2><p>在自定义目录下创建deploy脚本实现自动化部署，内容如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">echo "start deployment"</span><br><span class="line">cd /home/xxx/xxx.github.io</span><br><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master</span><br><span class="line">echo "done"</span><br></pre></td></tr></table></figure></p>
-<p>运行时如果会出现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd: can&apos;t cd to /home/xxx/xxx.github.io</span><br></pre></td></tr></table></figure></p>
-<p>原因可能是你的shell脚本在window上编写的，这样的话到linux系统运行时就会出现编码格式问题，window为dos而linux为unix。解决：<br>使用vim更改文件格式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim deploy.sh</span><br></pre></td></tr></table></figure></p>
-<p>查看文件格式：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set ff</span><br></pre></td></tr></table></figure></p>
-<p>更改文件格式为unix：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:set ff=unix</span><br><span class="line">或者</span><br><span class="line">:set fileformat=unix</span><br></pre></td></tr></table></figure></p>
-<h2 id="创建Webhook后端运行代码"><a href="#创建Webhook后端运行代码" class="headerlink" title="创建Webhook后端运行代码"></a>创建Webhook后端运行代码</h2><p>在上文deploy.sh文件同一目录下创建webhook.js文件，内容如下<br><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">var</span> createHandler = <span class="built_in">require</span>(<span class="string">'github-webhook-handler'</span>)</span><br><span class="line"><span class="keyword">var</span> handler = createHandler(&#123; <span class="attr">path</span>: <span class="string">'/auto_deploy'</span>, <span class="attr">secret</span>: <span class="string">'xxxx'</span> &#125;)</span><br><span class="line"><span class="comment">// 上面的 secret 在配置Github上webhook时需要用到</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run_cmd</span>(<span class="params">cmd, args, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> spawn = <span class="built_in">require</span>(<span class="string">'child_process'</span>).spawn;</span><br><span class="line">  <span class="keyword">var</span> child = spawn(cmd, args);</span><br><span class="line">  <span class="keyword">var</span> resp = <span class="string">""</span>;</span><br><span class="line">  child.stdout.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">buffer</span>) </span>&#123; resp += buffer.toString(); &#125;);</span><br><span class="line">  child.stdout.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; callback (resp) &#125;);</span><br><span class="line">&#125;</span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  handler(req, res, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    res.statusCode = <span class="number">404</span></span><br><span class="line">    res.end(<span class="string">'no such location'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;).listen(<span class="number">10000</span>)<span class="comment">//监听本地10000端口</span></span><br><span class="line">handler.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.error(<span class="string">'Error:'</span>, err.message)</span><br><span class="line">&#125;)</span><br><span class="line">handler.on(<span class="string">'push'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Received a push event for %s to %s'</span>,</span><br><span class="line">    event.payload.repository.name,</span><br><span class="line">    event.payload.ref);</span><br><span class="line">    run_cmd(<span class="string">'sh'</span>, [<span class="string">'./deploy.sh'</span>,event.payload.repository.name], <span class="function"><span class="keyword">function</span>(<span class="params">text</span>)</span>&#123; <span class="built_in">console</span>.log(text) &#125;);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//deploy.sh为自动化部署的脚本文件</span></span><br></pre></td></tr></table></figure></p>
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>由于本人的hexo博客是提交到GitHub上的，每一次更新博客都得在服务器上面手动pull更新，这样就显得十分蛋疼。所以Google了一下我的需求，发现了Github上的<a href="https://developer.github.com/webhooks/" target="_blank" rel="noopener">Webhooks</a>功能，为此记录下我实现的过程。</p>
+<a id="more"></a>
+
+<h2 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h2><p>由于Webhooks使用的是NodeJS，所以需要安装npm等相关的依赖。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nodejs</span><br><span class="line">sudo apt-get install npm</span><br></pre></td></tr></table></figure>
+<h2 id="安装webhooks后端服务所需要的组件"><a href="#安装webhooks后端服务所需要的组件" class="headerlink" title="安装webhooks后端服务所需要的组件"></a>安装webhooks后端服务所需要的组件</h2><p>安装github-webhook-handler</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -S github-webhook-handler</span><br></pre></td></tr></table></figure>
+
+<p>安装node进程管理工具pm2</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm i -g pm2</span><br></pre></td></tr></table></figure>
+<h2 id="创建自动化部署脚本文件deploy-sh"><a href="#创建自动化部署脚本文件deploy-sh" class="headerlink" title="创建自动化部署脚本文件deploy.sh"></a>创建自动化部署脚本文件deploy.sh</h2><p>在自定义目录下创建deploy脚本实现自动化部署，内容如下：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">echo "start deployment"</span><br><span class="line">cd /home/xxx/xxx.github.io</span><br><span class="line">git fetch --all</span><br><span class="line">git reset --hard origin/master</span><br><span class="line">echo "done"</span><br></pre></td></tr></table></figure>
+<p>运行时如果会出现：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cd: can&#39;t cd to &#x2F;home&#x2F;xxx&#x2F;xxx.github.io</span><br></pre></td></tr></table></figure>
+<p>原因可能是你的shell脚本在window上编写的，这样的话到linux系统运行时就会出现编码格式问题，window为dos而linux为unix。解决：<br>使用vim更改文件格式。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim deploy.sh</span><br></pre></td></tr></table></figure>
+<p>查看文件格式：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">:set ff</span><br></pre></td></tr></table></figure>
+<p>更改文件格式为unix：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">:set ff&#x3D;unix</span><br><span class="line">或者</span><br><span class="line">:set fileformat&#x3D;unix</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="创建Webhook后端运行代码"><a href="#创建Webhook后端运行代码" class="headerlink" title="创建Webhook后端运行代码"></a>创建Webhook后端运行代码</h2><p>在上文deploy.sh文件同一目录下创建webhook.js文件，内容如下</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">'http'</span>)</span><br><span class="line"><span class="keyword">var</span> createHandler = <span class="built_in">require</span>(<span class="string">'github-webhook-handler'</span>)</span><br><span class="line"><span class="keyword">var</span> handler = createHandler(&#123; <span class="attr">path</span>: <span class="string">'/auto_deploy'</span>, <span class="attr">secret</span>: <span class="string">'xxxx'</span> &#125;)</span><br><span class="line"><span class="comment">// 上面的 secret 在配置Github上webhook时需要用到</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">run_cmd</span>(<span class="params">cmd, args, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> spawn = <span class="built_in">require</span>(<span class="string">'child_process'</span>).spawn;</span><br><span class="line">  <span class="keyword">var</span> child = spawn(cmd, args);</span><br><span class="line">  <span class="keyword">var</span> resp = <span class="string">""</span>;</span><br><span class="line">  child.stdout.on(<span class="string">'data'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">buffer</span>) </span>&#123; resp += buffer.toString(); &#125;);</span><br><span class="line">  child.stdout.on(<span class="string">'end'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; callback (resp) &#125;);</span><br><span class="line">&#125;</span><br><span class="line">http.createServer(<span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  handler(req, res, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">    res.statusCode = <span class="number">404</span></span><br><span class="line">    res.end(<span class="string">'no such location'</span>)</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;).listen(<span class="number">10000</span>)<span class="comment">//监听本地10000端口</span></span><br><span class="line">handler.on(<span class="string">'error'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.error(<span class="string">'Error:'</span>, err.message)</span><br><span class="line">&#125;)</span><br><span class="line">handler.on(<span class="string">'push'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Received a push event for %s to %s'</span>,</span><br><span class="line">    event.payload.repository.name,</span><br><span class="line">    event.payload.ref);</span><br><span class="line">    run_cmd(<span class="string">'sh'</span>, [<span class="string">'./deploy.sh'</span>,event.payload.repository.name], <span class="function"><span class="keyword">function</span>(<span class="params">text</span>)</span>&#123; <span class="built_in">console</span>.log(text) &#125;);</span><br><span class="line">&#125;)</span><br><span class="line"><span class="comment">//deploy.sh为自动化部署的脚本文件</span></span><br></pre></td></tr></table></figure>
 <h2 id="使用pm2进程管理器运行webhook-js"><a href="#使用pm2进程管理器运行webhook-js" class="headerlink" title="使用pm2进程管理器运行webhook.js"></a>使用pm2进程管理器运行webhook.js</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pm2 start webhook.js</span><br></pre></td></tr></table></figure>
-<p>如果在运行的时候如果提示 github-webhook-handler is not defined 未找到 ，可以在目录中执行 npm link github-webhook-handler。<br>可以使用以下命令查看端口是否正常使用：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tlnp|grep 10000</span><br></pre></td></tr></table></figure></p>
+<p>如果在运行的时候如果提示 github-webhook-handler is not defined 未找到 ，可以在目录中执行 npm link github-webhook-handler。<br>可以使用以下命令查看端口是否正常使用：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -tlnp|grep 10000</span><br></pre></td></tr></table></figure>
 <p>正常结果如下图：<br><img src="https://i.imgur.com/AoGYaoE.png" alt="tcp"></p>
 <p>目前为止，一切顺利的话，webhook就在服务器上跑了起来，如果需要映射到公网的80端口，那么需要配置一下Nginx反向代理。</p>
-<h2 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h2><p>配置Nginx使访问网站80端口的<strong>/auto_deploy</strong>URL转发到本地的10000端口，在<strong>/etc/nginx/nginx.conf</strong>文件中加入如下配置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">server</span><br><span class="line">&#123;</span><br><span class="line">  # 80端口是http正常访问的接口</span><br><span class="line">  listen 80;</span><br><span class="line">  server_name xxx.com;</span><br><span class="line">  location /auto_deploy &#123;</span><br><span class="line">       proxy_pass http://127.0.0.1:10000;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>重启Nginx：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart nginx.service</span><br></pre></td></tr></table></figure></p>
+<h2 id="配置Nginx"><a href="#配置Nginx" class="headerlink" title="配置Nginx"></a>配置Nginx</h2><p>配置Nginx使访问网站80端口的<strong>/auto_deploy</strong>URL转发到本地的10000端口，在<strong>/etc/nginx/nginx.conf</strong>文件中加入如下配置：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">server</span><br><span class="line">&#123;</span><br><span class="line">  # 80端口是http正常访问的接口</span><br><span class="line">  listen 80;</span><br><span class="line">  server_name xxx.com;</span><br><span class="line">  location &#x2F;auto_deploy &#123;</span><br><span class="line">       proxy_pass http:&#x2F;&#x2F;127.0.0.1:10000;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>重启Nginx：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart nginx.service</span><br></pre></td></tr></table></figure>
 <h2 id="配置Github上的Webhook"><a href="#配置Github上的Webhook" class="headerlink" title="配置Github上的Webhook"></a>配置Github上的Webhook</h2><p>进入Github项目地址，点击设置按钮，找到Webhooks，进行如下配置：<br><img src="https://i.imgur.com/c1kTXAQ.jpg" alt=""><br>其中，Secret项需要和webhook.js文件中的保持一致，Content type 选择application/json。<br>不出意外的话可以看到最近提交是否成功。<br><img src="https://i.imgur.com/AlSPQ6A.jpg" alt=""></p>
 
       
@@ -523,7 +558,7 @@
     <strong>本文作者： </strong>Teoan</li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="https://teoan.top/2019/11/18/利用Github上的Webhooks实现网站自动化部署/" title="利用Github上的Webhooks实现网站自动化部署">https://teoan.top/2019/11/18/利用Github上的Webhooks实现网站自动化部署/</a>
+    <a href="https://teoan.top/2019/11/18/%E5%88%A9%E7%94%A8Github%E4%B8%8A%E7%9A%84Webhooks%E5%AE%9E%E7%8E%B0%E7%BD%91%E7%AB%99%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/" title="利用Github上的Webhooks实现网站自动化部署">https://teoan.top/2019/11/18/%E5%88%A9%E7%94%A8Github%E4%B8%8A%E7%9A%84Webhooks%E5%AE%9E%E7%8E%B0%E7%BD%91%E7%AB%99%E8%87%AA%E5%8A%A8%E5%8C%96%E9%83%A8%E7%BD%B2/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
@@ -536,7 +571,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/笔记/" rel="tag"># 笔记</a>
+            <a href="/tags/%E7%AC%94%E8%AE%B0/" rel="tag"># 笔记</a>
           
         </div>
       
@@ -549,7 +584,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/11/16/关于ASP.NET中Ajax请求错误的问题/" rel="next" title="关于ASP.NET中Ajax请求错误的问题">
+              <a href="/2019/11/16/%E5%85%B3%E4%BA%8EASP.NET%E4%B8%ADAjax%E8%AF%B7%E6%B1%82%E9%94%99%E8%AF%AF%E7%9A%84%E9%97%AE%E9%A2%98/" rel="next" title="关于ASP.NET中Ajax请求错误的问题">
                 <i class="fa fa-chevron-left"></i> 关于ASP.NET中Ajax请求错误的问题
               </a>
             
@@ -629,7 +664,7 @@
               
                 <div class="site-state-item site-state-posts">
                 
-                  <a href="/archives/">
+                  <a href="/archives/%20%7C%7C%20archive">
                 
                     <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">日志</span>
@@ -773,34 +808,35 @@
   <span class="author" itemprop="copyrightHolder">Teoan</span>
 
   
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="站点总字数">13k</span>
+  
 
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="站点阅读时长">Infinity:aN</span>
   
 </div>
 
 
 
+
+ 
+  
+ 
+  
 
 
 
         
-<div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-  
-    <span class="site-uv" title="总访客量">
-      <i class="fa fa-user"></i>
-      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
-    </span>
-  
-
-  
-    <span class="site-pv" title="总访问量">
-      <i class="fa fa-eye"></i>
-      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
-    </span>
-  
-</div>
-
 
 
 
@@ -1347,5 +1383,5 @@ color="255,255,255" opacity='0.7' zIndex="-1" count="200" src="//cdn.bootcss.com
 
   
 
-<script src="/live2dw/lib/L2Dwidget.min.js?0c58a1486de42ac6cc1c59c7d98ae887"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"react":{"opacityDefault":0.8},"mobile":{"show":true},"log":false});</script></body>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/hijiki.model.json"},"display":{"position":"right","width":100,"height":200},"react":{"opacityDefault":0.8},"mobile":{"show":false},"log":false});</script></body>
 </html>
