@@ -18,6 +18,7 @@
 <figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vue-cli-service build</span><br></pre></td></tr></table></figure>
 <p>打包完成后的目录：<br><img src="https://i.imgur.com/Urorx1q.jpg" alt=""></p>
 <p>打开index.html<br><img src="https://i.imgur.com/RBDE01w.jpg" alt=""><br>页面正常地显示了。</p>
+<p>参考：<a href="[https://cli.vuejs.org/zh/config/#%E5%85%A8%E5%B1%80-cli-%E9%85%8D%E7%BD%AE](https://cli.vuejs.org/zh/config/#全局-cli-配置)">vue.config.js配置参考</a></p>
 ]]></content>
       <categories>
         <category>Vue.js</category>
