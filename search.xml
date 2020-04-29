@@ -164,6 +164,33 @@
       </tags>
   </entry>
   <entry>
+    <title>关于vue-cli npm run build空白页问题</title>
+    <url>/2019/04/29/%E5%85%B3%E4%BA%8Evue-cli%20npm%20run%20build%E7%A9%BA%E7%99%BD%E9%A1%B5%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天准备调试自己写的SpringBoot后端api，打开之前部署在SpringBoot上的Vue.js前端页面时，发现是一整个空白的页面，由于自己刚接触SpringBoot和Vue.js前后端分离的开发模式，相关经验较少，在此记录自己的解决过程。</p>
+<a id="more"></a>
+
+<p>利用Chrome浏览器，按下f12打开控制台发现以下错误：文件路径错误<br><img src="https://i.imgur.com/fS0ARbq.jpg" alt="error"></p>
+<p>文件路径错误，导致css、js等文件获取不到，所以导致的页面的空白。</p>
+<p>为什么会找不到文件呢？打开Vue项目下的dist目录，发现文件是存在的。</p>
+<p><img src="https://i.imgur.com/RlG8Y3n.jpg" alt=""></p>
+<p>经过Goole查找相关资料和查阅Vue.config.js的官方配置参考后发现publicPath参数：<br><img src="https://i.imgur.com/gQ99ZC7.jpg" alt=""></p>
+<p>由于没有配置publicPath参数，所以默认的路径为绝对路径，导致引用资源文件时使用的也是绝对路径，所以也就渲染不了页面，最终显示为空白页。</p>
+<p>在vue.config.js文件中将publicPath参数设置为相对路径，这样打出来的包可以被部署在任意路径了。</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="built_in">module</span>.exports = &#123;</span><br><span class="line">    publicPath: <span class="string">"./"</span>,</span><br><span class="line">    assetsDir: <span class="string">"./static"</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>由于后端使用了Spring Security作权限管理，为了方便管理路径的权限，这里我还顺便配置了assetsDir参数，这参数是用来指定打包后的静态资源文件的位置的。<br>修改，保存后执行打包构建。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">vue-cli-service build</span><br></pre></td></tr></table></figure>
+<p>打包完成后的目录：<br><img src="https://i.imgur.com/Urorx1q.jpg" alt=""></p>
+<p>打开index.html<br><img src="https://i.imgur.com/RBDE01w.jpg" alt=""><br>页面正常地显示了。</p>
+]]></content>
+      <categories>
+        <category>Vue.js</category>
+        <category>SpringBoot</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>关于Android客户端RSA加解密后出现乱码的问题</title>
     <url>/2019/03/24/%E5%85%B3%E4%BA%8EAndroid%E5%AE%A2%E6%88%B7%E7%AB%AFRSA%E5%8A%A0%E8%A7%A3%E5%AF%86%E5%90%8E%E5%87%BA%E7%8E%B0%E4%B9%B1%E7%A0%81%E7%9A%84%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>在项目过程中需要通过okhttp获取服务器上数据库的数据后进行RSA解密。</p>
