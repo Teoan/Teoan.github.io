@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>关于spring-security 表单登录参数为null问题</title>
+    <url>/2020/05/04/%E5%85%B3%E4%BA%8Espring-Security-%E8%A1%A8%E5%8D%95%E7%99%BB%E5%BD%95%E5%8F%82%E6%95%B0%E4%B8%BAnul%E9%97%AE%E9%A2%98/</url>
+    <content><![CDATA[<h2 id="写在前面"><a href="#写在前面" class="headerlink" title="写在前面"></a>写在前面</h2><p>由于第一次使用SpringSecurity做登录认证模块，在此期间遇到不少的问题，在此记录下自己遇到的坑。</p>
+<a id="more"></a>
+
+<p>前端使用了axios进行数据的交互，代码如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">     postRequest(<span class="string">'/login'</span>, &#123;</span><br><span class="line">       username: username,</span><br><span class="line">       password: password</span><br><span class="line">     &#125;).then(<span class="function"><span class="params">resp</span>=&gt;</span> &#123;</span><br><span class="line">       _this.loading = <span class="literal">false</span>;</span><br><span class="line">       <span class="keyword">if</span> (resp.status == <span class="number">200</span>) &#123;</span><br><span class="line">         <span class="comment">//成功</span></span><br><span class="line">         </span><br><span class="line">       &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">         <span class="comment">//失败</span></span><br><span class="line">      </span><br><span class="line">       &#125;</span><br><span class="line">     &#125;, resp=&gt; &#123;</span><br><span class="line"><span class="comment">//失败</span></span><br><span class="line">     &#125;);</span><br></pre></td></tr></table></figure>
+<p>postRequest函数内容如下：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> postRequest = <span class="function">(<span class="params">url, params</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> axios(&#123;</span><br><span class="line">      method: <span class="string">'post'</span>,</span><br><span class="line">      url: <span class="string">`<span class="subst">$&#123;base&#125;</span><span class="subst">$&#123;url&#125;</span>`</span>,</span><br><span class="line">      data: params,</span><br><span class="line">      headers: &#123;</span><br><span class="line">        <span class="string">'Content-Type'</span>: <span class="string">'application/x-www-form-urlencoded;charset=UTF-8'</span></span><br><span class="line">      &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>服务端登录配置如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">configure</span><span class="params">(HttpSecurity http)</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">    ....</span><br><span class="line">	http.loginProcessingUrl(<span class="string">"/login"</span>)</span><br><span class="line">                .usernameParameter(<span class="string">"username"</span>)</span><br><span class="line">                .passwordParameter(<span class="string">"password"</span>);</span><br><span class="line">    ....</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>服务端认证代码如下：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> UserDetails <span class="title">loadUserByUsername</span><span class="params">(String s)</span> <span class="keyword">throws</span> UsernameNotFoundException </span>&#123;</span><br><span class="line">    User user= userService.loadUserByUsername(s);</span><br><span class="line">    <span class="keyword">if</span>(user==<span class="keyword">null</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> User();</span><br><span class="line">    &#125;</span><br><span class="line">    List&lt;Role&gt; roles = rolesService.getRoleByUid(user.getId());</span><br><span class="line">    user.setRoles(roles);</span><br><span class="line">    <span class="keyword">return</span> user;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>前端进行登录请求的时候一直提示登录失败，查看服务端后台log如下：<br><img src="https://i.imgur.com/hygFjqe.jpg" alt=""></p>
+<p>根据log，查看了服务端代码，发现UserDetailsService接口中的loadUserByUsername接收到的字符串为null。所以返回了一个空的User对象，导致密码匹配认证不通过。所以登录失败了。</p>
+<p>于是我使用了API调试工具进行登录测试：<br><img src="https://i.imgur.com/cDe3Huy.jpg" alt=""></p>
+<p>发现可以登录成功，于是猜测可能是前端的交互方式有问题，于是Google了一下，发现SpringSecurity默认的登录数据是通过 key/value 的形式来传递的，默认情况下不支持 JSON格式的登录数据。<br>知道原因之后就好解决了，我将axios中的参数改为key/value的方式：</p>
+<figure class="highlight javascript"><table><tr><td class="code"><pre><span class="line">      postRequest(<span class="string">'/login'</span>,<span class="string">'username='</span>+username+<span class="string">'&amp;password='</span>+password).then(<span class="function"><span class="params">resp</span>=&gt;</span>&#123;</span><br><span class="line">           <span class="keyword">if</span>(resp.status==<span class="number">200</span>)&#123;</span><br><span class="line">               <span class="comment">//成功</span></span><br><span class="line"><span class="keyword">this</span>.$alert(<span class="string">'登录成功！'</span>,<span class="string">'成功！'</span>);</span><br><span class="line">           &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">               <span class="keyword">this</span>.$alert(<span class="string">'登录失败！'</span>,<span class="string">'失败！'</span>);</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;,resp=&gt;&#123;</span><br><span class="line">           _this.$alert(<span class="string">'找不到服务器！'</span>, <span class="string">'失败!'</span>);</span><br><span class="line">       &#125;)</span><br></pre></td></tr></table></figure>
+<p>成功登录，问题解决。</p>
+]]></content>
+      <categories>
+        <category>axios</category>
+        <category>SpringSecurity</category>
+      </categories>
+      <tags>
+        <tag>笔记</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>关于vue-cli npm run build空白页问题</title>
     <url>/2020/04/29/%E5%85%B3%E4%BA%8Evue-cli%20npm%20run%20build%E7%A9%BA%E7%99%BD%E9%A1%B5%E9%97%AE%E9%A2%98/</url>
     <content><![CDATA[<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>今天准备调试自己写的SpringBoot后端api，打开之前部署在SpringBoot上的Vue.js前端页面时，发现是一整个空白的页面，由于自己刚接触SpringBoot和Vue.js前后端分离的开发模式，相关经验较少，在此记录自己的解决过程。</p>
