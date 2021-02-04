@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    总结一下毕业设计项目中所遇到的问题 |  Teoan&#39;s Notes
+    关于Maven的多模块管理 |  Teoan&#39;s Notes
   </title>
   <meta name="generator" content="hexo-theme-yilia-plus">
   
@@ -52,7 +52,7 @@ ga('send', 'pageview');
   <div id="app">
     <main class="content on">
       <section class="outer">
-  <article id="post-总结一下毕业设计项目中所遇到的问题" class="article article-type-post" itemscope
+  <article id="post-关于Maven的多模块管理" class="article article-type-post" itemscope
   itemprop="blogPost" data-scroll-reveal>
 
   <div class="article-inner">
@@ -60,7 +60,7 @@ ga('send', 'pageview');
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  总结一下毕业设计项目中所遇到的问题
+  关于Maven的多模块管理
 </h1>
  
 
@@ -69,12 +69,12 @@ ga('send', 'pageview');
 
     
     <div class="article-meta">
-      <a href="/2019/05/22/%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%89%80%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-date">
-  <time datetime="2019-05-22T02:55:25.000Z" itemprop="datePublished">2019-05-22</time>
+      <a href="/2021/02/03/%E5%85%B3%E4%BA%8EMaven%E7%9A%84%E5%A4%9A%E6%A8%A1%E5%9D%97%E7%AE%A1%E7%90%86/" class="article-date">
+  <time datetime="2021-02-03T11:42:39.000Z" itemprop="datePublished">2021-02-03</time>
 </a>
       
   <div class="article-category">
-    <a class="article-category-link" href="/categories/ARM/">ARM</a>
+    <a class="article-category-link" href="/categories/Maven/">Maven</a>
   </div>
 
       
@@ -84,7 +84,7 @@ ga('send', 'pageview');
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">794字</span>
+            <span class="post-count">1.1k字</span>
         </span>
     </span>
 
@@ -118,33 +118,62 @@ ga('send', 'pageview');
       
 
       
-      <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>经历了两个多月的时间，终于把毕业设计的要求一步一步地慢慢实现了，中间踩过的坑数不胜数，由此列出了一些遇到的问题还有解决方法。<br>项目地址：<a href="https://github.com/Teoan/garage" target="_blank" rel="noopener">https://github.com/Teoan/garage</a></p>
+      <p>Maven很强大，可以让我们在开发的过程中更加方便地去管理依赖。一般来说，如果是简单的个人项目的话，那项目分不分功能模块，就不显得那么重要。但是，如果项目有未来的发展甚至有更改架构或者多人协同开发的需求的话，那将项目各个功能拆分为多个功能模块就很有必要了。</p>
 <a id="more"></a>
 
-
-
-<h2 id="在ubuntu中QtCreator无法输入中文"><a href="#在ubuntu中QtCreator无法输入中文" class="headerlink" title="在ubuntu中QtCreator无法输入中文"></a>在ubuntu中QtCreator无法输入中文</h2><p>这个和输入法的类型有关，系统中所使用的输入法为Fcitx，然而Qt自带的插件中只支持iBus输入法。<br>解决：安装fcitx-libs-qt或fcitx-libs-qt5，在系统中找到<strong>libfcitxplatforminputcontextplugin.so</strong>这个动态库文件，复制到Qt安装目录中的<strong>/Tools/QtCreator/lib/Qt/plugins/platforminputcontexts</strong>子目录下，重新运行程序即可解决。(注意:不同版本的Qt，插件的路径会有所不同)</p>
-<h2 id="arm-linux-gcc-成功在Qt编译，但是上传到板子上面运行出现："><a href="#arm-linux-gcc-成功在Qt编译，但是上传到板子上面运行出现：" class="headerlink" title="arm-linux-gcc 成功在Qt编译，但是上传到板子上面运行出现："></a>arm-linux-gcc 成功在Qt编译，但是上传到板子上面运行出现：</h2><blockquote>
-<p>.-/bin/sh: ./xxxxx: not found</p>
-</blockquote>
-<p>解决:我用的工具链版本是4.4.3，板子上内核是用5.4.0编译的，版本不匹配，换一个5.4.0的交叉编译工具链或者比5.4.0新就可以了。</p>
-<h2 id="关于交叉编译工具链的选择"><a href="#关于交叉编译工具链的选择" class="headerlink" title="关于交叉编译工具链的选择"></a>关于交叉编译工具链的选择</h2><p>网上查到的大多数ARM交叉编译工具链版本为4.4.3或者5.4.0，基本上4.4.3版本为32位系统的，5.4.0版本为64位的，然而现在网上资源默认你是用64位版本的系统，所以给的工具链都不会和你说是64位的，然而我用的是32位系统的，为此也遇到了许多坑。网上32位交叉编译工具链的资源比较少，要么得自己去编译，要么要一大堆积分去下载。偶然发现一家和ARM公司合作的<a href="https://www.linaro.org/" target="_blank" rel="noopener">Linaro公司</a>,虽然是英文的但是在里面可以找到各种版本个平台的交叉编译工具，再也不用为找ARM交叉编译工具链而烦恼了。<br>各平台各版本下载地址:<a href="https://releases.linaro.org/components/toolchain/binaries/" target="_blank" rel="noopener">https://releases.linaro.org/components/toolchain/binaries/</a></p>
-<h2 id="在ARM板上面使用opencv时，出现"><a href="#在ARM板上面使用opencv时，出现" class="headerlink" title="在ARM板上面使用opencv时，出现:"></a>在ARM板上面使用opencv时，出现:</h2><blockquote>
-<p>error while loading shared libraries: /lib/libm.so.6: internal error</p>
-</blockquote>
-<p>解决:出现这个问题应该是arm板上面的openvc库的软连接弄丢了，特别是在windows交叉编译的opencv的库,重新建立软连接就可以了。</p>
-<h2 id="关于误删除libc-so-6"><a href="#关于误删除libc-so-6" class="headerlink" title="关于误删除libc.so.6"></a>关于误删除libc.so.6</h2><p>删除后发现各种大多数指令都用不了，会出现没有找到动态库的情况。<br>解决:利用 <strong>LD_PRELOAD=</strong> 指定运行时的动态库，可以暂时使用常用命令重建软连接。例如：</p>
-<blockquote>
-<p>LD_PRELOAD=/lib64/libc-2.12.so ln -s /lib64/libc-2.12.so /lib64/libc.so.6</p>
-</blockquote>
-<h2 id="使用easypr后识别结果为乱码"><a href="#使用easypr后识别结果为乱码" class="headerlink" title="使用easypr后识别结果为乱码"></a>使用easypr后识别结果为乱码</h2><blockquote>
-<p>“\u00E8\u0093\u009D\u00E7\u0089\u008C:\u00E5\u00B7\u009DA88888”</p>
-</blockquote>
-<p>解决:<br>原本的字符串处理方式为:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">CPlate cp =plateVec.at(<span class="number">0</span>);</span><br><span class="line"><span class="keyword">String</span> ret = cp.getPlateStr();</span><br><span class="line">QString str =QString::fromLocal8Bit(ret.c_str());</span><br><span class="line">ui-&gt;label-&gt;setText(str);</span><br></pre></td></tr></table></figure>
-<p>改为:</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">CPlate cp =plateVec.at(<span class="number">0</span>);</span><br><span class="line">cv::<span class="keyword">String</span> ret = cp.getPlateStr();</span><br><span class="line">ui-&gt;label-&gt;setText(ret.c_str());</span><br></pre></td></tr></table></figure>
-<p>注意:ret.c_str()实现可以从cv::String类转换为count char * ,以上做法可以实现在Qt中显示中文，但是如果输出到终端还是会有乱码问题，如果需要终端输出，用cout直接输出String就可以了。</p>
+<h2 id="将单模块项目拆分为多模块后有什么好处？"><a href="#将单模块项目拆分为多模块后有什么好处？" class="headerlink" title="将单模块项目拆分为多模块后有什么好处？"></a>将单模块项目拆分为多模块后有什么好处？</h2><p>单模块项目的的话，随着项目的发展和代码量的叠加，各个功能代码之间会不可避免地耦合在一起，这就与<strong>高内聚，低耦合</strong>背道而行了。将项目进行多模块拆分有以下好处：</p>
+<ul>
+<li>降低耦合性：将项目拆分为各个模块，各个模块负责实现各自的功能，系统一旦出了问题，定位起来也比较方便。</li>
+<li>使项目结构更加清晰：将项目按照职责或者功能进行拆分，使开发者更容易分析了解项目。</li>
+<li>规范边界：不同的开发者可以根据不同的模块确定自己所负责的代码内容。</li>
+<li>…</li>
+</ul>
+<h2 id="如何按照职责或者功能进行拆分？"><a href="#如何按照职责或者功能进行拆分？" class="headerlink" title="如何按照职责或者功能进行拆分？"></a>如何按照职责或者功能进行拆分？</h2><h3 id="按照职责拆分"><a href="#按照职责拆分" class="headerlink" title="按照职责拆分"></a>按照职责拆分</h3><p>所谓按照职责拆分，就是按照web系统各层的结构去拆分。</p>
+<ul>
+<li>tclass-entity</li>
+<li>tclass-mapper</li>
+<li>tclass-service</li>
+<li>tclass-controller</li>
+<li>tclass-common</li>
+<li>tclass-util</li>
+</ul>
+<h3 id="按照功能拆分"><a href="#按照功能拆分" class="headerlink" title="按照功能拆分"></a>按照功能拆分</h3><p>按照功能拆分，将系统中各个功能拆分为各个独立的模块，不仅开发者分工清晰，还可以方便系统设计为微服务架构。</p>
+<ul>
+<li>tclass-login 登录</li>
+<li>tclass-notice 通知</li>
+<li>tclass-work 作业</li>
+<li>tclass- file 文件</li>
+<li>tclass-user 用户</li>
+</ul>
+<h2 id="搭建多模块项目"><a href="#搭建多模块项目" class="headerlink" title="搭建多模块项目"></a>搭建多模块项目</h2><h4 id="创建父模块"><a href="#创建父模块" class="headerlink" title="创建父模块"></a>创建父模块</h4><p>首先，创建一个基本的Maven项目。因为作为父模块，依赖什么的都可以不用选。</p>
+<p><img src="https://i.jpg.dog/img/79c379dd9f7af03cbb5d98f172843fe9.png" alt=""></p>
+<p><img src="https://i.jpg.dog/img/63574e6939b0c56725161b9baae6c472.png" alt=""></p>
+<p>我们看一下父模块中的pom.xml文件。</p>
+<p><img src="https://i.jpg.dog/img/1c8843ef9d0c51cb1c7a559c5f3febb1.png" alt=""></p>
+<p>因为我们要将项目拆分为多个子模块，父模块中的内容就是各个子模块，所以我们将父模块中的src文件夹删除。</p>
+<p><img src="https://i.jpg.dog/img/00fd16cae91f1d02b16eabd67cb93564.png" alt=""></p>
+<h4 id="创建子模块"><a href="#创建子模块" class="headerlink" title="创建子模块"></a>创建子模块</h4><p>创建子模块和创建普通的项目一样，可以理解为在父项目中创建子项目。每一个子模块都有自己完整的项目目录结构，我们可以为子模块选择所需的依赖。</p>
+<p><img src="https://i.jpg.dog/img/5039eb1dae86db8f74e4940aef23ba62.png" alt=""></p>
+<p>注意这里多了个父项的选择。</p>
+<p><img src="https://i.jpg.dog/img/4f111ab9f3995e7758bf54a049b54ca4.png" alt=""></p>
+<p>我们看一下子模块的目录结构，会发现它和普通Maven项目没有什么区别。</p>
+<p><img src="https://i.jpg.dog/img/baf500afa5971ccbbdbf895c016c33bb.png" alt=""></p>
+<p>我们再看一下父模块的pom.xml，会发现多了<modules>和<packing>标签。</p>
+<p><img src="https://i.jpg.dog/img/a51f73551efaff9e5c0dbce84b4ca8c3.png" alt=""></p>
+<p> <strong>packaging</strong>为pom，表示选择最简单的打包方式，生成的构件只有它本身。而<strong>modules</strong>则表示子模块相对于当前模块的路径。我们再看一下子模块中的pom.xml文件中的内容。</p>
+<p><img src="https://i.jpg.dog/img/604e5ac914aaa031604d1ed1b34c6f7c.png" alt=""></p>
+<p><strong>parent</strong>标签表示该模块继承的父模块信息，包括<strong>artifactId</strong>、<strong>groupId</strong>、<strong>version</strong>等，其实这里还省略了<strong>relativePath</strong>标签，默认<strong>relativePath</strong>的值是<strong>../pom.xml</strong>，由于子模块在父模块的下级目录。所以这个标签一般是不用写的。倘若子模块与父模块的位置发生改变，那么这里就要对<strong>relativePath</strong>进行声明。</p>
+<p><strong>parent</strong>标签外的<strong>artifactId</strong>是子模块组件的id，由于声明了父模块，所以子模块中的<strong>groupId</strong>、<strong>version</strong>继承自父模块，可以不用填写。</p>
+<h2 id="子模块的依赖"><a href="#子模块的依赖" class="headerlink" title="子模块的依赖"></a>子模块的依赖</h2><p>若模块二依赖于模块一，则可以像引入Maven依赖一样，在模块二的<strong>pom.xml</strong>中，利用<strong>dependencies</strong>标签引入模块一。</p>
+<p><img src="https://i.jpg.dog/img/f56771a3aa726e67d26eb4b4947bfda6.png" alt=""></p>
+<p><img src="https://i.jpg.dog/img/14c41f0efa9923263c760ff79b7726f3.png" alt=""></p>
+<p>需要注意的是，模块间的相互依赖，需要处理好各模块之间的依赖关系，否则容易导致循环依赖或者版本冲突。</p>
+<h2 id="关于依赖版本的控制"><a href="#关于依赖版本的控制" class="headerlink" title="关于依赖版本的控制"></a>关于依赖版本的控制</h2><p>由于将项目拆分为多个子模块，子模块继承了父模块的一些信息。为了方便管理整个项目的依赖的版本，我们可以在父模块中对依赖版本进行声明，而子模块在声明依赖时，只需声明groupId、artifactId即可。</p>
+<p>父模块</p>
+<p><img src="https://i.jpg.dog/img/7b4b8cd59fbe2b78efb57439c5a55822.png" alt=""></p>
+<p>子模块</p>
+<p><img src="https://i.jpg.dog/img/5a3434996b9d1e2521edd3dcf88f341f.png" alt=""></p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>以上内容其实是自己在做项目的过程中，对Maven多模块管理具体实现的记录。由于一些不可控降低原因，直到项目尾声后才想起来做一个笔记。Maven的强大远远不止于此，还有许多功能等着我去发现。</p>
 
       
       <!-- reward -->
@@ -210,7 +239,7 @@ ga('send', 'pageview');
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://teoan.ml/2019/05/22/%E6%80%BB%E7%BB%93%E4%B8%80%E4%B8%8B%E6%AF%95%E4%B8%9A%E8%AE%BE%E8%AE%A1%E9%A1%B9%E7%9B%AE%E4%B8%AD%E6%89%80%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://teoan.ml/2021/02/03/%E5%85%B3%E4%BA%8EMaven%E7%9A%84%E5%A4%9A%E6%A8%A1%E5%9D%97%E7%AE%A1%E7%90%86/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -228,19 +257,10 @@ ga('send', 'pageview');
   
   <nav class="article-nav">
     
-      <a href="/2019/09/21/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8BJava%20Web%E9%A1%B9%E7%9B%AE%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            记录一下Java Web项目遇到的问题
-          
-        </div>
-      </a>
     
-    
-      <a href="/2019/03/24/%E5%85%B3%E4%BA%8EAndroid%E5%AE%A2%E6%88%B7%E7%AB%AFRSA%E5%8A%A0%E8%A7%A3%E5%AF%86%E5%90%8E%E5%87%BA%E7%8E%B0%E4%B9%B1%E7%A0%81%E7%9A%84%E9%97%AE%E9%A2%98/" class="article-nav-link">
+      <a href="/2020/05/10/%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8BSpringSecurity%E7%9A%84%E4%BD%BF%E7%94%A8%E8%BF%87%E7%A8%8B/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">关于Android客户端RSA加解密后出现乱码的问题</div>
+        <div class="article-nav-title">记录一下SpringSecurity的使用过程</div>
       </a>
     
   </nav>
